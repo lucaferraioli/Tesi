@@ -1,111 +1,119 @@
-package servlet;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package servlet;
 
+import beans.Camera;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
- 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
- 
-import beans.Product;
 import utils.DBUtils;
 import utils.MyUtils;
- 
-@WebServlet(urlPatterns = { "/editProduct" })
-public class EditProductServlet extends HttpServlet {
+
+/**
+ *
+ * @author lucaf
+ */
+@WebServlet(urlPatterns = {"/editCamera"})
+public class EditCameraServlet extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
- 
-    public EditProductServlet() {
+
+    public EditCameraServlet() {
         super();
     }
- 
-    // Show product edit page.
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
- 
-        String code = (String) request.getParameter("code");
- 
-        Product product = null;
- 
+        
+        String ip = (String) request.getParameter("ip");
+        
+        Camera camera = null;
+        
         String errorString = null;
  
         try {
-            product = DBUtils.findProduct(conn, code);
+            camera = DBUtils.findCamera(conn, ip);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
         }
- 
+        
         // If no error.
         // The product does not exist to edit.
-        // Redirect to productList page.
-        if (errorString != null && product == null) {
-            response.sendRedirect(request.getServletPath() + "/productList");
+        // Redirect to cameraList page.
+        if (errorString != null && camera == null) {
+            response.sendRedirect(request.getServletPath() + "/camera");
             return;
         }
- 
+        
         // Store errorString in request attribute, before forward to views.
         request.setAttribute("errorString", errorString);
-        request.setAttribute("product", product);
+        request.setAttribute("camera", camera);
  
         RequestDispatcher dispatcher = request.getServletContext()
-                .getRequestDispatcher("/WEB-INF/views/editProductView.jsp");
+                .getRequestDispatcher("/WEB-INF/views/editCameraView.jsp");
         dispatcher.forward(request, response);
- 
+         
     }
- 
-    // After the user modifies the product information, and click Submit.
-    // This method will be executed.
+
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
- 
-        String code = (String) request.getParameter("code");
-        String name = (String) request.getParameter("name");
-        String priceStr = (String) request.getParameter("price");
-        float price = 0;
-        try {
-            price = Float.parseFloat(priceStr);
-        } catch (Exception e) {
-        }
-        Product product = new Product(code, name, price);
+        
+        String ip = (String) request.getParameter("ip");
+        String username = (String) request.getParameter("username");
+        String password = (String) request.getParameter("password");
+        
+        Camera camera = new Camera(ip, username, password);
  
         String errorString = null;
- 
+        
         try {
-            DBUtils.updateProduct(conn, product);
+            DBUtils.updateCamera(conn, camera);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
         }
         // Store infomation to request attribute, before forward to views.
         request.setAttribute("errorString", errorString);
-        request.setAttribute("product", product);
- 
+        request.setAttribute("camera", camera);
+        
         // If error, forward to Edit page.
         if (errorString != null) {
             RequestDispatcher dispatcher = request.getServletContext()
-                    .getRequestDispatcher("/WEB-INF/views/editProductView.jsp");
+                    .getRequestDispatcher("/WEB-INF/views/editCameraView.jsp");
             dispatcher.forward(request, response);
         }
         // If everything nice.
         // Redirect to the product listing page.
         else {
-            response.sendRedirect(request.getContextPath() + "/productList");
+            response.sendRedirect(request.getContextPath() + "/camera");
         }
+        
     }
- 
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
 }

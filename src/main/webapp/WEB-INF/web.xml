@@ -5,9 +5,25 @@
         <servlet-name>ProductListServlet</servlet-name>
         <servlet-class>servlet.ProductListServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditCameraServlet</servlet-name>
+        <servlet-class>servlet.EditCameraServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCameraServlet</servlet-name>
+        <servlet-class>servlet.DeleteCameraServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductListServlet</servlet-name>
         <url-pattern>/productList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCameraServlet</servlet-name>
+        <url-pattern>/EditCameraServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCameraServlet</servlet-name>
+        <url-pattern>/DeleteCameraServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

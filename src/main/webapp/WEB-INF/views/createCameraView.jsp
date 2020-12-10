@@ -36,6 +36,7 @@
             <tr>
                <td colspan="2">                   
                    <input type="submit" value="Submit" />
+                   <a href="${pageContext.request.contextPath}/camera">Annulla</a>
                </td>
             </tr>
          </table>

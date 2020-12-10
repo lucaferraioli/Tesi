@@ -31,7 +31,7 @@
                <td><input type="text" name="password" value= "${user.password}" /> </td>
             </tr>
             <tr>
-               <td>Remember me</td>
+                <td>Remember me</td>
                <td><input type="checkbox" name="rememberMe" value= "Y" /> </td>
             </tr>
             <tr>
