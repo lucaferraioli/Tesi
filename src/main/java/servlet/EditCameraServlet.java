@@ -37,14 +37,14 @@ public class EditCameraServlet extends HttpServlet {
             throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
         
-        String ip = (String) request.getParameter("ip");
+        String name = (String) request.getParameter("name");
         
         Camera camera = null;
         
         String errorString = null;
  
         try {
-            camera = DBUtils.findCamera(conn, ip);
+            camera = DBUtils.findCamera(conn, name);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
@@ -74,11 +74,14 @@ public class EditCameraServlet extends HttpServlet {
             throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
         
+        String name = (String) request.getParameter("name");
         String ip = (String) request.getParameter("ip");
         String username = (String) request.getParameter("username");
         String password = (String) request.getParameter("password");
+        String port = (String) request.getParameter("port");
+        String url = (String) request.getParameter("url");
         
-        Camera camera = new Camera(ip, username, password);
+        Camera camera = new Camera(name, ip, username, password, port, url);
  
         String errorString = null;
         

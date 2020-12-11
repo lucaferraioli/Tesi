@@ -6,6 +6,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,16 +19,16 @@
         <jsp:include page="_menu.jsp"></jsp:include>
 
             <h3>Home Page</h3>
+    <c:forEach items="${cameraList}" var="camera" >
+        <video width="500" controls autoplay>
 
-            <video width="500" controls autoplay>
+            <source src="http://localhost:${camera.port}/${camera.name}"
+                    type="video/mp4">
 
-                <source src="http://localhost:8082/camera1"
-                        type="video/mp4">
+            Sorry, your browser doesn't support embedded videos.
+        </video>
+    </c:forEach>
+    <jsp:include page="_footer.jsp"></jsp:include>
 
-                Sorry, your browser doesn't support embedded videos.
-            </video>
-
-        <jsp:include page="_footer.jsp"></jsp:include>
-
-    </body>
+</body>
 </html>

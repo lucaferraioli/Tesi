@@ -18,23 +18,29 @@
         <jsp:include page="_menu.jsp"></jsp:include>
             <table border="1" cellpadding="5" cellspacing="1" >
                 <tr>
+                    <th>Name</th>
                     <th>Ip</th>
                     <th>Username</th>
                     <th>Password</th>
+                    <th>Port</th>
+                    <th>Url</th>
                     <th>Edit</th>
                     <th>Delete</th>
 
                 </tr>
             <c:forEach items="${cameraList}" var="camera" >
                 <tr>
+                    <td>${camera.name}</td>
                     <td>${camera.ip}</td>
                     <td>${camera.username}</td>
                     <td>${camera.password}</td>
+                    <td>${camera.port}</td>
+                    <td>${camera.url}</td>
                     <td>
-                        <a href="editCamera?ip=${camera.ip}">Edit</a>
+                        <a href="editCamera?name=${camera.name}">Edit</a>
                     </td>
                     <td>
-                        <a href="deleteCamera?ip=${camera.ip}">Delete</a>
+                        <a href="deleteCamera?name=${camera.name}">Delete</a>
                     </td>
                 </tr>
             </c:forEach>

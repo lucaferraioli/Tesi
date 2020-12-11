@@ -51,20 +51,23 @@ public class CreateCameraServlet extends HttpServlet {
 
         Connection conn = MyUtils.getStoredConnection(request);
 
+        String name = (String) request.getParameter("name");
         String ip = (String) request.getParameter("ip");
         String username = (String) request.getParameter("username");
         String password = (String) request.getParameter("password");
+        String port = (String) request.getParameter("port");
+        String url = (String) request.getParameter("url");
 
         String errorString = null;
 
-        Camera camera = new Camera(ip, username, password);
+        Camera camera = new Camera(name, ip, username, password, port, url);
         
         // Camera Ip is the string literal [a-zA-Z_0-9] and dot
         // with at least 1 character
         String regex = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$";
  
         if (ip == null || !ip.matches(regex)) {
-            errorString = "Camera ip invalid!";
+            errorString = "Camera Name invalid!";
         }
  
 

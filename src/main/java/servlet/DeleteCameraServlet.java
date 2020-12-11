@@ -34,12 +34,12 @@ public class DeleteCameraServlet extends HttpServlet {
             throws ServletException, IOException {
         Connection conn = MyUtils.getStoredConnection(request);
  
-        String ip = (String) request.getParameter("ip");
+        String name = (String) request.getParameter("name");
  
         String errorString = null;
         
         try {
-            DBUtils.deleteCamera(conn, ip);
+            DBUtils.deleteCamera(conn, name);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();

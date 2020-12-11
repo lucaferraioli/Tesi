@@ -24,11 +24,15 @@
  
       <c:if test="${not empty camera}">
          <form method="POST" action="${pageContext.request.contextPath}/editCamera">
-            <input type="hidden" name="ip" value="${camera.ip}" />
+            <input type="hidden" name="name" value="${camera.name}" />
             <table border="0">
+                <tr>
+                  <td>Name</td>
+                  <td style="color:red;">${camera.name}</td>
+               </tr>
                <tr>
                   <td>Ip</td>
-                  <td style="color:red;">${camera.ip}</td>
+                  <td><input type="text" name="ip" value="${camera.ip}" /></td>
                </tr>
                <tr>
                   <td>Username</td>
@@ -37,6 +41,14 @@
                <tr>
                   <td>Password</td>
                   <td><input type="text" name="password" value="${camera.password}" /></td>
+               </tr>
+               <tr>
+                  <td>Port</td>
+                  <td><input type="text" name="port" value="${camera.port}" /></td>
+               </tr>
+               <tr>
+                  <td>Url</td>
+                  <td><input type="text" name="url" value="${camera.url}" /></td>
                </tr>
                <tr>
                   <td colspan = "2">
